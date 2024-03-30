@@ -33,16 +33,14 @@ const App = () => {
     <button className='cta-button connect-wallet-button'
            onClick={connectWallet}>Connect to Wallet</button>
   );
-  //adding connect wallet
 
   return (
     <div className="App">
       <div className="container">
-        aaaaaa
         <div className="header-container">
           <p className="header">🖼 GIF Portal</p>
           <p className="sub-text">
-            View your GIF collection in the metaverse ✨
+            View your GIF collection in the metaverse ✨asadbv
           </p>
           {renderNotConnectedContainer()}
         </div>
