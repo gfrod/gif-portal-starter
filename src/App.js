@@ -5,11 +5,10 @@ import './App.css';
 // Constants
 const TWITTER_HANDLE = '_buildspace';
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
-
+const [walletAddress, setWalletAddress] = useState(null)
 const App = () => {
-
+  
   //Wallet State
-  const [walletAddress, setWalletAddress] = React.useState(null)
 
   const checkIfWalletIsConnected = async () => {
     if(window?.solana?.isPhantom){
