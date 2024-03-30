@@ -38,6 +38,7 @@ const App = () => {
   return (
     <div className="App">
       <div className="container">
+        aaaaaa
         <div className="header-container">
           <p className="header">🖼 GIF Portal</p>
           <p className="sub-text">
