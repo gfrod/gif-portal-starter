@@ -67,7 +67,7 @@ const App = () => {
             View your GIF collection in the metaverse ✨
           </p>
           {/* Add the condition to show this only if we don't have a wallet address */}
-          {!walletAddress && renderNotConnectedContainer()}
+          {!walletAddress && renderNotConnectedContainer}
         </div>
         <div className="footer-container">
           <img alt="Twitter Logo" className="twitter-logo" src={twitterLogo} />
