@@ -6,31 +6,34 @@ import './App.css';
 const TWITTER_HANDLE = '_buildspace';
 const TWITTER_LINK = `https://twitter.com/${TWITTER_HANDLE}`;
 
+
 const App = () => {
   // State
   const [walletAddress, setWalletAddress] = useState(null);
 
+  const getProvider = () => {
+    if ('phantom' in window) {
+      const provider = window.phantom?.solana;
+  
+      if (provider?.isPhantom) {
+        return provider;
+      }
+    }
+  
+    window.open('https://phantom.app/', '_blank');
+  };
+
   // Actions
   const checkIfWalletIsConnected = async () => {
-    if (window?.solana?.isPhantom) {
-      console.log('Phantom wallet found!');
-      try {
-        const response = await window.solana.connect({ onlyIfTrusted: true });
-      }
-      catch (err){
-        console.log('Could not connect to solana: ', err);
-      }
-      console.log(
-        'Connected with Public Key:',
-        response.publicKey.toString()
-      );
-
-      /*
-       * Set the user's publicKey in state to be used later!
-       */
-      setWalletAddress(response.publicKey.toString());
-    } else {
-      alert('Solana object not found! Get a Phantom Wallet 👻');
+    const provider = getProvider(); // see "Detecting the Provider"
+    try {
+        const resp = await provider.connect();
+        provider.on("connect", () => console.log("connected!", resp.publicKey.toString()));
+        //console.log(resp.publicKey.toString());
+        // 26qv4GCcx98RihuK3c4T6ozB3J7L6VwCuFVc7Ta2A3Uo 
+    } catch (err) {
+      console.log('Error connecting: ', err)
+        // { code: 4001, message: 'User rejected the request.' }
     }
   };
 
