@@ -54,6 +54,7 @@ const App = () => {
     }
     catch{
       try{
+        const provider = getProvider()
         const resp = await provider.connect();
         provider.on("connect", () => console.log("connected!", resp.publicKey.toString()));
         setWalletAddress(resp.publicKey.toString());
