@@ -34,6 +34,7 @@ const App = () => {
     try {
         const resp = await provider.connect();
         provider.on("connect", () => console.log("connected!", resp.publicKey.toString()));
+        setWalletAddress(resp.publicKey.toString());
         //console.log(resp.publicKey.toString());
         // 26qv4GCcx98RihuK3c4T6ozB3J7L6VwCuFVc7Ta2A3Uo 
     } catch (err) {
@@ -43,12 +44,24 @@ const App = () => {
   };
 
   const connectWallet = async () => {
-    const { solana } = window;
+    const { solana, phantom } = window;
 
-  if (solana) {
-    const response = await solana.connect();
-    console.log('Connected with Public Key:', response.publicKey.toString());
-    setWalletAddress(response.publicKey.toString());
+  if (solana || phantom?.solana) {
+    try {
+       response = await solana.connect();
+        console.log('Connected with Public Key:', response.publicKey.toString());
+        setWalletAddress(response.publicKey.toString());
+    }
+    catch{
+      try{
+        const resp = await provider.connect();
+        provider.on("connect", () => console.log("connected!", resp.publicKey.toString()));
+        setWalletAddress(resp.publicKey.toString());
+      }
+      catch(err){
+        console.log('Error connecting: ', err)
+      }
+    }
   }
   };
 
